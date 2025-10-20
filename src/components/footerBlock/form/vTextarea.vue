@@ -20,7 +20,6 @@ const props = defineProps<{
   display: block;
   width: 100%;
   min-height: 144px;
-  padding: 24px 32px;
   background: #fff;
   border: 1px solid #DDDFE1;
   border-radius: 4px;
@@ -31,6 +30,8 @@ const props = defineProps<{
   color: #000;
   resize: vertical;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  
+  @include responsive('padding', 12px 16px, 12px 16px, 24px 32px);
   
   &::placeholder {
     color: #767676;

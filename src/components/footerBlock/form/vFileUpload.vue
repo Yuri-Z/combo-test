@@ -14,10 +14,10 @@ const files = computed({
   set: (val) => (modelValue.value = val)
 })
 
-const handleFiles = (fileList: FileList | null) => {
+const handleFiles = (fileList: FileList | null)  => {
   if (!fileList?.length) return
   const fileArray = Array.from(fileList)
-  files.value = props.multiple ? [...files.value, ...fileArray] : [fileArray[0]]
+  files.value = props.multiple ? [...files.value, ...fileArray] as File[] : [fileArray[0]] as File[]
 }
 
 const handleDrop = (e: DragEvent) => {
@@ -92,12 +92,8 @@ const removeFile = (index: number) => {
 .dropzone {
   position: relative;
   width: 100%;
-  min-height: 72px;
-  padding: 16px 24px;
-  font-family: Graphik, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 140%;
+  @include font-graphik();
+  @include responsive('font-size', 16px);
   color: #444;
   
   cursor: pointer;
@@ -105,6 +101,9 @@ const removeFile = (index: number) => {
   border: 1px dashed #dddfE1;
   border-radius: 4px;
   transition: border-color 0.2s ease, background 0.2s ease;
+  
+  @include responsive('min-height', 48px, 48px, 72px);
+  @include responsive('padding', 12px 16px, 12px 16px, 24px 32px);
   
   &__input {
     display: none;

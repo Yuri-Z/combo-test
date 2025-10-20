@@ -8,7 +8,7 @@ import VButton from '@/components/footerBlock/vButton.vue'
 
 
 const emits = defineEmits<{
-  (e: 'onSubmit')
+  (e: 'onSubmit'): void
 }>()
 const options = ['Partnership', 'Service request', 'Career', 'Other']
 
@@ -55,18 +55,18 @@ const options = ['Partnership', 'Service request', 'Career', 'Other']
   width: 100%;
   max-width: 1072px;
   
-  &__row+&__row {
-    margin-top: 24px;
+  &__row + &__row {
+    @include responsive('margin-top', 8px, 8px, 24px);
     
     &_double-input {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 64px;
+      @include responsive('grid-template-columns', 1fr, 1fr, 1fr 1fr);
+      @include responsive('grid-gap', 8px, 8px, 64px);
     }
     &_header-inline {
       display: grid;
-      grid-template-columns: 0fr 1fr;
-      grid-gap: 64px;
+      @include responsive('grid-template-columns', 1fr, 1fr, 0fr 1fr);
+      @include responsive('grid-gap', 8px, 8px, 64px);
     }
   }
   &__header {
@@ -74,10 +74,8 @@ const options = ['Partnership', 'Service request', 'Career', 'Other']
     width: max-content;
     align-items: center;
     
-    font-family: Graphik, sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 170%;
+    @include font-graphik();
+    @include responsive('font-size', 18px);
   }
   &__submit-button {
     width: 100%;

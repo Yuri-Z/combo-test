@@ -18,8 +18,6 @@ const props = defineProps<{
 .input {
   display: block;
   width: 100%;
-  height: 72px;
-  padding: 24px 32px;
   background: #fff;
   border: 1px solid #DDDFE1;
   border-radius: 4px;
@@ -29,6 +27,9 @@ const props = defineProps<{
   line-height: 140%;
   color: #000;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  
+  @include responsive('height', 48px, 48px, 72px);
+  @include responsive('padding', 12px 16px, 12px 16px, 24px 32px);
   
   &::placeholder {
     color: #767676;
