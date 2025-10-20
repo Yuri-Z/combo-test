@@ -20,10 +20,8 @@ const emits = defineEmits<{
   justify-content: center;
   padding: 28px;
   
-  font-family: Monument Extended, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 110%;
+  @include font-monument();
+  @include responsive('font-size', 14px);
   text-transform: uppercase;
   vertical-align: middle;
   

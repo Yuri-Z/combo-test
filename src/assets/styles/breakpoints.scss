@@ -1,0 +1,27 @@
+$breakpoints: (
+  'xs': 320px,
+  'sm': 768px,
+  'md': 1024px,
+  'lg': 1280px,
+  'xl': 1536px
+);
+
+@mixin responsive($property, $xs: null, $sm: null, $md: null, $lg: null, $xl: null) {
+  @if $xs != null {
+    #{$property}: $xs;
+  }
+
+  @each $size, $width in $breakpoints {
+    $value: null;
+    @if $size == 'sm' { $value: $sm; }
+    @if $size == 'md' { $value: $md; }
+    @if $size == 'lg' { $value: $lg; }
+    @if $size == 'xl' { $value: $xl; }
+
+    @if $value != null {
+      @media (min-width: $width) {
+        #{$property}: $value;
+      }
+    }
+  }
+}

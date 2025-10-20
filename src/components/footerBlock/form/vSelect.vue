@@ -69,11 +69,9 @@ const selectOption = (option: string) => {
   line-height: 140%;
   
   &__active-item {
-    height: 72px;
     background: #fff;
     border: 1px solid #DDDFE1;
     border-radius: 4px;
-    padding: 24px 32px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -81,6 +79,9 @@ const selectOption = (option: string) => {
     transition: border-color 0.2s ease;
     position: relative;
     color: #000;
+    
+    @include responsive('height', 48px, 48px, 72px);
+    @include responsive('padding', 12px 16px, 12px 16px, 24px 32px);
     
     &:hover {
       border-color: #b0b0b0;
@@ -134,9 +135,11 @@ const selectOption = (option: string) => {
   }
   &__item {
     color: #767676;
-    padding: 24px 32px;
     cursor: pointer;
     transition: background 0.2s ease;
+    
+    @include responsive('height', 48px, 48px, 72px);
+    @include responsive('padding', 12px 16px, 12px 16px, 24px 32px);
     
     &:hover {
       background: #f2f7ff;

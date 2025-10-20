@@ -25,16 +25,16 @@ const animationState = computed(() => {
 </script>
 
 <template>
-  <div class="footer-wrapper animation-coloring" :class="[`animation-coloring_${animationState}`]">
+  <div :class="[`animation-coloring_${animationState}`]" class="footer-wrapper animation-coloring">
     <div class="footer">
-      <button class="footer__back-button animation-fade-in" :class="[`animation-fade-in_${animationState}`]" @click="toggleForm">Go back</button>
-      <div class="footer__row footer__row_flex-column animation-slide" :class="[`animation-slide_${animationState}`]">
+      <button :class="[`animation-fade-in_${animationState}`]" class="footer__back-button animation-fade-in" @click="toggleForm">Go back</button>
+      <div :class="[`animation-slide_${animationState}`]" class="footer__row footer__row_flex-column animation-slide">
         <div class="footer__banner">Let's Build</div>
         <div class="footer__banner footer__banner_large">Future together</div>
       </div>
-      <div style="margin-top: 45px;" class="animation-fade-out" :class="[`animation-fade-out_${animationState}`]">
+      <div :class="[`animation-fade-out_${animationState}`]" class="animation-fade-out footer__row-wrapper">
         <div class="footer__row footer__row_space">
-          <v-button color="secondary" class="footer__button" @on-click="toggleForm">Contact Us</v-button>
+          <v-button class="footer__button" color="secondary" @on-click="toggleForm">Contact Us</v-button>
           <div class="footer__lists">
             <div class="footer__list-wrapper">
               <div class="footer__list-header">{{ pagesList.header }}</div>
@@ -66,14 +66,14 @@ const animationState = computed(() => {
         </div>
       </div>
       </div>
-      <div class="animation-fade-in" :class="[`animation-fade-in_${animationState}`]">
-        <div class="footer__row footer__row_narrow">
+      <div :class="[`animation-fade-in_${animationState}`]" class="animation-fade-in">
+        <div class="footer__row footer__row_form">
         <span class="footer__plain-text">
           EZ Blockchain believes that modern technologies and hard teamwork can significantly benefit energy businesses and reduce CO2 emissions.
           Let's talk about how we can do it together.
         </span>
         </div>
-        <div class="footer__row footer__row_narrow">
+        <div class="footer__row footer__row_form">
           <v-form @on-submit="toggleForm"/>
         </div>
       </div>
@@ -81,38 +81,38 @@ const animationState = computed(() => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .footer-wrapper {
   width: 100%;
-  min-height: 590px;
+  
+  @include responsive('min-height', 700px, 590px, 420px, 590px);
 }
 
 .footer {
+  position: relative;
   display: flex;
   flex-flow: column;
   max-width: 1680px;
   margin: auto;
-  padding: 100px 0 36px;
-  font-family: Monument Extended, sans-serif;
-  font-weight: 400;
-  
-  letter-spacing: 0;
+  @include responsive('padding', 32px 8px 16px, 32px 8px 36px, 40px 12px 36px, 100px 12px 36px);
   
   &__back-button {
-    background-color: transparent;
     position: absolute;
-    font-family: Monument Extended, sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 110%;
-    text-transform: uppercase;
-    color: #45B7F4;
-    cursor: pointer;
     height: initial !important;
+    
+    color: #45B7F4;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: transparent;
+    
+    @include font-monument();
+    @include responsive('font-size', 14px);
+    @include responsive('right', 8px, 8px, initial);
+    @include responsive('top', 80px, 80px, initial);
   }
   
-  &__row +&__row {
-    margin-top: 45px;
+  &__row + &__row, &__row-wrapper {
+    @include responsive('margin-top', 12px, 12px, 16px, 45px);
   }
   &__row {
     display: flex;
@@ -122,73 +122,75 @@ const animationState = computed(() => {
       flex-flow: column;
     }
     &_space {
-      align-items: flex-start;
-      justify-content: space-between; /* кнопка слева, списки справа */
+      @include responsive('align-items', center, center, flex-start);
+      justify-content: space-between;
+      @include responsive('flex-flow', column, column, initial);
     }
-    &_narrow {
-      padding-left: 230px;
+    &_form {
+      @include responsive('padding-left', 0px, 0px, 200px, 200px, 230px);
+    }
+    &_table-like {
+      @include responsive('flex-flow', column, column, row)
     }
   }
   &__banner {
-    font-size: 40px;
+    @include font-monument();
+    @include responsive('font-size', 16px, 16px, 32px, 40px);
+    
     text-transform: uppercase;
   }
   &__banner_large {
-    font-size: 80px;
+    @include font-monument();
+    @include responsive('font-size', 26px, 28px, 48px, 80px);
   }
   &__button {
-    width: 288px;
-    height: 72px;
+    @include responsive('width', 100%, 100%, 288px);
+    @include responsive('height', 48px, 48px, 72px);
   }
   &__lists {
     display: flex;
     justify-content: space-between;
-    width: 50%;
     margin-top: 26px;
+    
+    @include responsive('width', 100%, 100%, 50%);
+    @include responsive('padding', 0 12px, 0 12px, 0);
   }
   &__list-wrapper {
     display: flex;
     flex-flow: column;
   }
   &__list-header {
-    font-family: Monument Extended, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 120%;
-    letter-spacing: 0;
     margin-bottom: 16px;
+    @include font-monument(); // 80px
+    @include responsive('font-size', 16px);
   }
   &__list {
     display: grid;
     grid-auto-flow: column;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-column-gap: 40px;
+    @include responsive('grid-template-rows', repeat(6, 1fr), 1fr 1fr 1fr);
+    @include responsive('grid-row-gap', 8px, initial);
+    @include responsive('grid-column-gap', 20px, 20px, 40px);
   }
   &__list-item {
     display: block;
-    font-family: Graphik, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 26px;
-    letter-spacing: 0;
+    @include font-graphik();
+    @include responsive('font-size', 16px);
     
   }
   &__legal-information-item {
     display: flex;
     flex-grow: 1;
     flex-flow: column;
-    padding: 21px;
     
-    font-family: Graphik, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 120%;
-    letter-spacing: 0;
+    @include font-graphik();
+    @include responsive('font-size', 14px, 14px, 14px, 16px);
     
-    border-top: 1px solid;
-    border-right: 1px solid;
-    border-left: 1px solid;
-    border-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-bottom-width: 0;
+    
+    @include responsive('padding', 16px 8px, 16px 8px, 16px 8px, 21px);
+    @include responsive('border-left-width', 0, 0, 1px);
+    @include responsive('border-right-width', 0, 0, 1px);
     
     &:first-child {
       border-left: none;
@@ -198,21 +200,16 @@ const animationState = computed(() => {
     }
   }
   &__legal-information-subitem {
-    font-family: Graphik, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 120%;
-    letter-spacing: 0;
+    @include font-graphik();
+    @include responsive('font-size', 16px);
     opacity: .6;
   }
   
   &__plain-text {
-    width: 50%;
     max-width: 570px;
-    font-family: Graphik, sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 140%;
+    @include font-graphik();
+    @include responsive('font-size', 16px);
+    @include responsive('width', 100%, 100%, 50%);
     color: #495160;
   }
 }
@@ -220,7 +217,7 @@ const animationState = computed(() => {
 .animation-slide {
   transition: padding-left .5s;
   &_forwards {
-    padding-left: 230px;
+    @include responsive('padding-left', 0px, 0px, 200px, 200px, 230px);
   }
   &_backwards {
     padding-left: 0;
@@ -242,38 +239,40 @@ const animationState = computed(() => {
   }
 }
 .animation-fade-in {
-  transition-property: opacity, max-height;
-  transition-duration: 0.5s;
   overflow-y: hidden;
+  transition-duration: 0.5s;
+  transition-property: opacity, max-height;
   
   &_forwards {
+    max-height: 950px;
     opacity: 1;
     transition-delay: 1s;
-    max-height: 950px;
   }
   &_backwards {
-    opacity: 0;
-    pointer-events: none;
     max-height: 0;
+    pointer-events: none;
+    opacity: 0;
   }
 }
 .animation-fade-out {
-  transition-property: opacity, max-height;
-  transition-duration: 0.5s;
   overflow-y: hidden;
+  transition-duration: 0.5s;
+  transition-property: opacity, max-height;
   
   &_forwards {
-    opacity: 0;
     max-height: 0;
     pointer-events: none;
+    opacity: 0;
     transition-delay: .5s, .5s;
   }
   &_backwards {
+    @include responsive('max-height', unset, unset, 360px);
     opacity: 1;
     transition-delay: .5s;
     transition-duration: 0.5s, 0.1s;
-    max-height: 270px;
   }
 }
+
+
 </style>
 
