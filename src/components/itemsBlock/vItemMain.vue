@@ -22,7 +22,7 @@ const itemStore = useItemStore()
     </div>
     <div class="item-main__lists">
       <div class="item-main__column">
-        <v-item-list :item-list="itemStore.userItems" @on-click="itemStore.onSelectUserItem"/>
+        <v-item-list :item-list="itemStore.userItems" show-if-picked @on-click="itemStore.onSelectUserItem"/>
       </div>
       
       <div class="item-main__column">
