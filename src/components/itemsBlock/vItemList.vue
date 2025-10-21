@@ -3,7 +3,8 @@ import VItem from '@/components/itemsBlock/vItem.vue'
 import {type iItem} from '@/stores/itemStore.ts'
 
 const props = defineProps<{
-  itemList: iItem[]
+  itemList: iItem[],
+  showIfPicked?: boolean
 }>()
 
 const emits = defineEmits<{
@@ -14,7 +15,7 @@ const emits = defineEmits<{
 
 <template>
   <div v-if="props.itemList.length" class="item-list">
-    <v-item v-for="item in props.itemList" :key="item.id" :item="item" @on-click="emits('onClick', item)"/>
+    <v-item v-for="item in props.itemList" :key="item.id" :show-if-picked="props.showIfPicked" :item="item" @on-click="emits('onClick', item)"/>
   </div>
   <div v-else class="item-list item-list_empty">
     no items in list

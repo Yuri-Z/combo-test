@@ -21,7 +21,7 @@ export const useItemStore = defineStore('itemStore', () => {
 
     if (index >= 0) {
       selectionList.value.splice(index, 1)
-    } else {
+    } else if (selectionList.value.length < 6) {
       selectionList.value.push(newItem)
     }
   }
